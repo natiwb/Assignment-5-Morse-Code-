@@ -35,8 +35,16 @@ Returns:
 
 		for(String printTree:morseCode.toArrayList()) 
 		{
-			sb.append(printTree);
+			if(printTree.contains("null"))
+			{
+				sb.append("");
+			}
+			else
+			{
+				sb.append(printTree);
+			}
 			sb.append(" ");
+			System.out.println(printTree);
 		}
 		String appended=sb.toString();
 		System.out.println(appended);
@@ -111,8 +119,9 @@ java.io.FileNotFoundException
 			while(sc.hasNext()) 
 			{
 				toBeTranslated+=sc.next();
-				toBeTranslated+="";
+				toBeTranslated+=" ";
 			}
+			System.out.println(toBeTranslated);
 			return convertToEnglish(toBeTranslated);
 
 		}

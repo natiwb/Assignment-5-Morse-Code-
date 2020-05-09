@@ -6,7 +6,7 @@ public class MorseCodeTree extends Object implements LinkedConverterTreeInterfac
 	 * MorseCodeTree() 
           Constructor - calls the buildTree method
 	 */
-	TreeNode<String> root=new TreeNode<String>("EMPTY");
+	TreeNode<String> root=new TreeNode<String>("");
 
 	public MorseCodeTree() 
 	{
@@ -78,13 +78,13 @@ Returns:
 
 			if(code.charAt(0) == '.') {
 				if(root.left== null) {
-					root.left =new TreeNode<String> ("EMPTY");
+					root.left =new TreeNode<String> ("");
 				}
 				addNode(root.left, code.substring(1),letter);
 			}
 			else if(code.charAt(0)== '-') {
 				if(root.right== null) {
-					root.right =new TreeNode<String>("EMPTY");
+					root.right =new TreeNode<String>("");
 				}
 
 				addNode(root.right, code.substring(1), letter);
@@ -186,7 +186,7 @@ buildTree in interface LinkedConverterTreeInterface<java.lang.String>
 	@Override
 	public void buildTree() 
 	{
-		root=new TreeNode<String>("EMPTY"); //root
+		root=new TreeNode<String>(""); //root
 		insert(".","e");//lvl1
 		insert("-", "t");
 
@@ -266,8 +266,12 @@ list - the ArrayList that will hold the contents of the tree in LNR order
 			LNRoutputTraversal(root.left, list);
 		}
 
-		list.add(root.data );
-
+		if(root.data == null)
+		{
+			list.add("");
+		}
+		else
+			list.add(root.data);
 		if(root.right!=null) 
 		{
 			LNRoutputTraversal(root.right,list);
