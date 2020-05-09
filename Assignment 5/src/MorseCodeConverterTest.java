@@ -35,13 +35,13 @@ public class MorseCodeConverterTest {
 		s = s.trim(); // take off preceding or succeeding spaces
 		assertEquals(correctResult, s);
 	}
-	
+
 	@Test
 	public void testConvertToEnglishString() {	
 		String converter1 = MorseCodeConverter.convertToEnglish("--. --- --- -.. -... -.-- . / .-- --- .-. .-.. -.. ");
 		System.out.println(converter1);
 		assertEquals("goodbye world",converter1);
-		
+
 		String test2="daisy daisy";		
 		String converter2 = MorseCodeConverter.convertToEnglish("-.. .- .. ... -.-- / -.. .- .. ... -.-- ");
 		assertEquals("daisy daisy", converter2);
@@ -53,14 +53,14 @@ public class MorseCodeConverterTest {
 		getFile("Daisy.txt");
 		String converter1 = MorseCodeConverter.convertToEnglish(inputFile);
 		assertEquals(test1,converter1);
-		
+
 		String test2="im half crazy all for the love of you";		
 		getFile("DaisyDaisy.txt");
 		String converter2 = MorseCodeConverter.convertToEnglish(inputFile);
 		assertTrue(true);
 
 	}
-	
+
 	public void getFile(String in) throws FileNotFoundException {		
 		JFileChooser chooser = new JFileChooser();
 		int status;
@@ -83,4 +83,16 @@ public class MorseCodeConverterTest {
 		}
 	}
 
+	@Test
+	public void testConvertToEnglishString2() {	
+		String converter1 = MorseCodeConverter.convertToEnglish("--. --- --- -.. -... -.-- . / .-- --- .-. .-.. -.. ");
+		System.out.println(converter1);
+		assertEquals("goodbye world",converter1);
+
+		String test2="daisy daisy";		
+		String converter2 = MorseCodeConverter.convertToEnglish("-.. .- .. ... -.-- / -.. .- .. ... -.-- ");
+		assertEquals("daisy daisy", converter2);
+	}
+	
+	
 }
