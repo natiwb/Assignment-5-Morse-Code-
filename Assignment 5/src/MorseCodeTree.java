@@ -6,7 +6,7 @@ public class MorseCodeTree extends Object implements LinkedConverterTreeInterfac
 	 * MorseCodeTree() 
           Constructor - calls the buildTree method
 	 */
-	TreeNode<String> root;
+	TreeNode<String> root=new TreeNode<String>("EMPTY");
 
 	public MorseCodeTree() 
 	{
@@ -39,7 +39,7 @@ Returns:
 	@Override
 	public LinkedConverterTreeInterface<String> insert(String code, String result) 
 	{
-		this.addNode(root,code,result);
+		addNode(root,code,result);
 
 		return this;
 	}
@@ -72,33 +72,30 @@ Returns:
 	@Override
 	public void addNode(TreeNode<String> root, String code, String letter)
 	{
-		if(code.length()<=1) 
-		{
-			if(code.equals(".")) 
-			{
-				root.left=new TreeNode<String>(letter);
-			}
 
-			else if(code.equals("-")) 
-			{
-				root.right=new TreeNode<String>(letter);
+		letter = letter.toLowerCase();
+		if(code.length() >= 1) {
+
+			if(code.charAt(0) == '.') {
+				if(root.left== null) {
+					root.left =new TreeNode<String> ("EMPTY");
+				}
+				addNode(root.left, code.substring(1),letter);
+			}
+			else if(code.charAt(0)== '-') {
+				if(root.right== null) {
+					root.right =new TreeNode<String>("EMPTY");
+				}
+
+				addNode(root.right, code.substring(1), letter);
 			}
 		}
+
 		else
-		{
-			if(code.charAt(0)=='.') 
-			{
-				addNode(root.left,code.substring(1),letter);
-			}
-
-			else if(code.charAt(0)=='-') 
-			{
-				addNode(root.right,code.substring(1),letter);
-			}
-
-		}
-
+			root.data = letter;
 	}
+
+
 
 	/**
 	 * Fetch the data in the tree based on the code This method will call the recursive method fetchNode
@@ -132,33 +129,35 @@ Returns:
 	{
 		String letter=null;
 
-		if(code.length()<=1) 
+		if(code.length()==1)
 		{
-			if(code.equals(".")) 
+			if(code.equals("."))
 			{
-				letter=root.left.getData();
+				letter=(String) root.left.data;
 				return letter;
 			}
 
-			else if(code.equals("-")) 
+			else if(code.equals("-"))
 			{
-				letter=root.right.getData();
+				letter=(String) root.right.data;
 				return letter;
 			}
 		}
 		else
 		{
-			if(code.charAt(0)=='.') 
+			if(code.charAt(0)=='.')
 			{
 				return fetchNode(root.left,code.substring(1));
 			}
 
-			else if(code.charAt(0)=='-') 
+			else if(code.charAt(0)=='-')
 			{
 				return fetchNode(root.right,code.substring(1));
 			}
 		}
 		return letter;
+
+
 
 	}
 
@@ -187,7 +186,7 @@ buildTree in interface LinkedConverterTreeInterface<java.lang.String>
 	@Override
 	public void buildTree() 
 	{
-		root=new TreeNode<String>(""); //root
+		root=new TreeNode<String>("EMPTY"); //root
 		insert(".","e");//lvl1
 		insert("-", "t");
 
@@ -218,6 +217,18 @@ buildTree in interface LinkedConverterTreeInterface<java.lang.String>
 		insert("--..", "z");
 		insert("--.-", "q");
 
+
+		/*
+		root.left=new TreeNode<String>("e");
+		root.right=new TreeNode<String>("t");
+
+		root.left.left=new TreeNode<String>("i");
+		root.left.right=new TreeNode<String>("a");
+
+		System.out.println(toArrayList());
+		 */
+
+
 	}
 
 	/**
@@ -232,6 +243,7 @@ an ArrayList of the items in the linked Tree
 	{
 		ArrayList<String> toArrayList=new ArrayList<String>();
 		LNRoutputTraversal(root,toArrayList);
+
 		return toArrayList;
 	}
 
@@ -249,12 +261,16 @@ list - the ArrayList that will hold the contents of the tree in LNR order
 	public void LNRoutputTraversal(TreeNode<String> root, ArrayList<String> list) 
 	{
 		//Inorder (Left, Root, Right)
-		if(root!=null) 
+		if(root.left!=null) 
 		{
-			LNRoutputTraversal(root.left,list);
+			LNRoutputTraversal(root.left, list);
 		}
-		else
-			list.add(root.getData());
 
+		list.add(root.data );
+
+		if(root.right!=null) 
+		{
+			LNRoutputTraversal(root.right,list);
+		}
 	}
 }

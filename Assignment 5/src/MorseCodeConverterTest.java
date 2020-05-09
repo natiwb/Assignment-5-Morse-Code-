@@ -39,6 +39,7 @@ public class MorseCodeConverterTest {
 	@Test
 	public void testConvertToEnglishString() {	
 		String converter1 = MorseCodeConverter.convertToEnglish("--. --- --- -.. -... -.-- . / .-- --- .-. .-.. -.. ");
+		System.out.println(converter1);
 		assertEquals("goodbye world",converter1);
 		
 		String test2="daisy daisy";		
